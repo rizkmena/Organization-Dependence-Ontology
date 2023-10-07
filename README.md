@@ -1,1 +1,3 @@
 # Organization-Dependence-Ontology
+
+This repository contains the Organizational Dependence Ontology. Its conceptual framework and corresponding first-order logic axiomatization are contained in ```model.pdf```. The Z3 implementation is provided in ```odo_z3py_implementation.py```. The OWL implementation is provided across two files: ```odo_owl_implementation.owl``` and ```odo_owl_extension.py```. The latter file implements axioms that cannot be expressed in description logic using SPARQL queries. An application of the ontology is demonstrated in ```application.pdf```. Note that the corresponding instances in the application scenario are also implemented in both the Z3 and OWL implementations, to allow for user testing.
