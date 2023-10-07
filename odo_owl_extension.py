@@ -13,11 +13,11 @@ import owlready2
 
 
 #running HermiT initially:
-onto = get_ontology("file://odo_v3_app.owl").load()
+onto = get_ontology("file://odo_owl_implementation.owl").load()
 with onto:
     sync_reasoner(infer_property_values = True)
 
-onto.save("temp_file.owl")
+onto.save("temp.owl")
 
 
 # Namespace
@@ -28,53 +28,8 @@ g = Graph()
 
 
 # read in exported owl file from protege
-g.parse('temp_file.owl')
+g.parse('temp.owl')
 
-
-# # outcome dependence, predictive need
-# for ag1 in g.subjects(RDF.type, odo.Agent, unique=True):
-#         for ag2 in g.subjects(RDF.type, odo.Agent, unique=True):
-#             if ag1 != ag2:
-#
-#                 # outcome dependence
-#                 for e in g.subjects(RDF.type, odo.Evaluation, unique=True):
-#
-#                     # two agents case
-#                     if ((e, odo.hasEvaluatee, ag1) in g) and ((e, odo.hasEvaluatee, ag2) in g):
-#                             d = odo.term(f"OD_{odo.ag1.split('/')[-1]}_{odo.ag2.split('/')[-1]}_{odo.e.split('/')[-1]}")
-#                             g.add((d,RDF.type,odo.OutcomeDependency))
-#                             g.add((d, odo.hasDepender, ag1))
-#                             g.add((d, odo.hasDependee, ag1))
-#                             g.add((d, odo.hasEvaluation, ag1))
-#
-#                     # common membership case
-#                     for ag3 in g.subjects(RDF.type, odo.Evaluation, unique=True):
-#                         if ((e, odo.hasEvaluatee, ag3) in g) and ((ag1, odo.memberOf, ag3) in g) and ((ag2, odo.memberOf, ag3) in g):
-#                             d = odo.term(f"OD_{odo.ag1.split('/')[-1]}_{odo.ag2.split('/')[-1]}_{odo.e.split('/')[-1]}")
-#                             g.add((d,RDF.type,odo.OutcomeDependency))
-#                             g.add((d, odo.hasDepender, ag1))
-#                             g.add((d, odo.hasDependee, ag1))
-#                             g.add((d, odo.hasEvaluation, ag1))
-#
-#                 # predictive need
-#                 for act1 in g.subjects(RDF.type, odo.Activity, unique=True):
-#                     for act2 in g.subjects(RDF.type, odo.Activity, unique=True):
-#                         if ((ag1, odo.performs, act1) in g) and ((ag1, odo.performs, act2) in g) and ((act1, odo.dependsOn, act2) in g):
-#                             pn = odo.term(f"PN_{odo.ag1.split('/')[-1]}_{odo.ag2.split('/')[-1]}_{odo.act1.split('/')[-1]}_{odo.act2.split('/')[-1]}")
-#                             g.add((pn, RDF.type, odo.PredictiveNeed))
-#                             g.add((pn, odo.hasPredicandAgent, ag2))
-#                             g.add((pn, odo.hasPredictorAgent, ag1))
-#                             g.add((pn, odo.hasPredicandActivity, act2))
-#                             g.add((pn, odo.hasPredictorActivity, act1))
-#
-#                             # epistemic dependence
-#                             # for e in g.subjects(RDF.type, odo.Evaluation, unique=True):
-#                             #     for i in g.subjects(RDF.type, odo.Incentive, unique=True):
-#                             #         if ((e, odo.hasEvaluatee, ag1) in g) and ((e, odo.hasIncentive, i) in g)
-#                             #
-#                             #
-#                             #         for s in g.objects(act1, odo.causes, unique=True):
-#                             #             if
 
 # SOLE CONTRIBUTOR TO
 sc_query = """
@@ -451,7 +406,7 @@ for res in coop_risk_results:
 
 
                         
-g.serialize(destination="odo_processed_test_v2.ttl", format="ttl")
+g.serialize(destination="odo_processed.ttl", format="ttl")
 
 
 
